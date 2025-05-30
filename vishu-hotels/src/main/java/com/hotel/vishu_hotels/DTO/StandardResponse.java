@@ -19,4 +19,5 @@ public class StandardResponse<T> {
     private T data ;
     private int statusCode ;
     private String message ;
+    private boolean success ;
 }

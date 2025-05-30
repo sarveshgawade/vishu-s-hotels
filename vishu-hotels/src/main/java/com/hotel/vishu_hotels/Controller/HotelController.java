@@ -33,7 +33,8 @@ public class HotelController {
         StandardResponse<Hotel> response = new StandardResponse<>(
             savedHotel,
             HttpStatus.CREATED.value(),
-            "Hotel created successfully !"
+            "Hotel created successfully !",
+            true
         ) ;
 
         return new ResponseEntity<>(response,HttpStatus.CREATED) ;
@@ -46,7 +47,8 @@ public class HotelController {
         StandardResponse<List<Hotel>> response = new StandardResponse<>(
             hotelList,
             HttpStatus.OK.value(),
-            "Hotels fetched successfully"
+            "Hotels fetched successfully",
+            true
         ) ;
 
         return new ResponseEntity<>(response,HttpStatus.OK) ;
