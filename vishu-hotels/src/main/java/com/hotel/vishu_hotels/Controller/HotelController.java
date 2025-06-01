@@ -41,7 +41,7 @@ public class HotelController {
     }
 
     @GetMapping()
-    public ResponseEntity<StandardResponse<List<Hotel> >> getMethodName() {
+    public ResponseEntity<StandardResponse<List<Hotel> >> getHotels() {
         List<Hotel> hotelList =  hotelRepository.findAll();
 
         StandardResponse<List<Hotel>> response = new StandardResponse<>(

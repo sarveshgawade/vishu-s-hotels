@@ -2,6 +2,7 @@ package com.hotel.vishu_hotels.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,6 +26,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Enumerated()
     private String role; 
 
     @ManyToOne
