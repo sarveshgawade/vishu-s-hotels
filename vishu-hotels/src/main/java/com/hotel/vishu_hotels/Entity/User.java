@@ -1,7 +1,11 @@
 package com.hotel.vishu_hotels.Entity;
 
+
+import com.hotel.vishu_hotels.enums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -18,16 +24,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id ;
 
-    private String name;
+    @NotBlank(message = "User name is a required field")
+    private String username;
 
     @Column(unique = true, nullable = false)
+    @Email(message = "Invalid email format !")
     private String email;
 
+    @NotBlank(message = "Password is a required field")
     @Column(nullable = false)
     private String password;
 
-    @Enumerated()
-    private String role; 
+    @Enumerated(EnumType.STRING)
+    @NotBlank(message = "Role is a required field")
+    private Role role; 
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
@@ -42,11 +52,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getEmail() {
@@ -65,11 +75,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

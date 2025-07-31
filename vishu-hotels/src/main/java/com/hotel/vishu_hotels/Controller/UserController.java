@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.vishu_hotels.Repository.UserRepository;
 
+
 @RestController
 @RequestMapping("/api/vishu-hotels/user")
 public class UserController {
@@ -13,5 +14,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository ;
 
+    
     
 }   

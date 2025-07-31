@@ -4,5 +4,6 @@
     public enum Role {
         ADMIN,
         HOTEL_OWNER,
-        HOTEL_STAFF
+        HOTEL_STAFF,
+        MASTER_ADMIN
     }

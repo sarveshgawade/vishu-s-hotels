@@ -1,34 +1,45 @@
 package com.hotel.vishu_hotels.Controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.vishu_hotels.DTO.StandardResponse;
+import com.hotel.vishu_hotels.DTO.Hotel.CreateHotelRequestDTO;
 import com.hotel.vishu_hotels.Entity.Hotel;
-import com.hotel.vishu_hotels.Repository.HotelRepository;
+import com.hotel.vishu_hotels.Service.HotelService;
 
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
 @RequestMapping("/api/vishu-hotels")
 public class HotelController {
 
-    @Autowired
-    private HotelRepository hotelRepository ;
+    private final HotelService hotelService;
+
+    //used constructor injection 
+    /*
+     * Why Constructor Injection?
+        Improves immutability—dependencies can’t be changed after creation.
+
+        Makes your classes easier to test.
+
+        Ensures all required dependencies are provided at object creation.
+
+        Reveals dependency issues clearly at startup
+     */
+    public HotelController(HotelService hotelService){
+        this.hotelService = hotelService ;
+    }
 
     @PostMapping()
-    public ResponseEntity<StandardResponse<Hotel>> createHotel(@Valid @RequestBody Hotel hotel) {
-        Hotel savedHotel =  hotelRepository.save(hotel);
+    public ResponseEntity<StandardResponse<Hotel>> createHotel(@Valid @RequestBody CreateHotelRequestDTO hotel) {
+        Hotel savedHotel =  hotelService.createHotel(hotel) ;
 
         StandardResponse<Hotel> response = new StandardResponse<>(
             savedHotel,
@@ -39,20 +50,5 @@ public class HotelController {
 
         return new ResponseEntity<>(response,HttpStatus.CREATED) ;
     }
-
-    @GetMapping()
-    public ResponseEntity<StandardResponse<List<Hotel> >> getHotels() {
-        List<Hotel> hotelList =  hotelRepository.findAll();
-
-        StandardResponse<List<Hotel>> response = new StandardResponse<>(
-            hotelList,
-            HttpStatus.OK.value(),
-            "Hotels fetched successfully",
-            true
-        ) ;
-
-        return new ResponseEntity<>(response,HttpStatus.OK) ;
-    }
-    
     
 }

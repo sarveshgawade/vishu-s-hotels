@@ -5,6 +5,7 @@
     import jakarta.persistence.GeneratedValue;
     import jakarta.persistence.GenerationType;
     import jakarta.persistence.Id;
+    import jakarta.validation.constraints.Email;
     import jakarta.validation.constraints.NotBlank;
 
     @Entity
@@ -22,6 +23,7 @@
 
         @NotBlank(message = "Email is a required field")
         @Column(unique = true)
+        @Email(message = "Invalid Email format")
         private String email;
 
         @NotBlank(message = "Contact Number is a required field")
